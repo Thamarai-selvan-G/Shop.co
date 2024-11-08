@@ -4,12 +4,12 @@ import { GrFormPreviousLink } from "react-icons/gr";
 import { GrFormNextLink } from "react-icons/gr";
 import { useRef } from "react";
 
-// components/CustomerReviews.js
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper-bundle.css";
-import SwiperCore, { Navigation, Pagination } from "swiper";
+import { Navigation, Pagination } from "swiper/modules"; // Use the correct Swiper module imports
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
-SwiperCore.use([Navigation, Pagination]);
 
 const reviews = [
   {
@@ -61,7 +61,7 @@ const CustomerReviews = () => {
         ref={swiperRef}
         spaceBetween={30}
         slidesPerView={3}
-        navigation={false}
+        navigation={false} 
         pagination={{ clickable: false }}
         loop={true}
         breakpoints={{
