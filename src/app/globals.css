@@ -1,0 +1,72 @@
+/* src/app/globals.css */
+
+/* Integral CF Font */
+@font-face {
+  font-family: 'Integral CF';
+  src: url('./fonts/Fontspring-DEMO-integralcf-bold.otf') format('opentype'); /* Bold font */
+  font-weight: bold;
+  font-style: normal; /* Normal style for bold font */
+}
+
+/* Satoshi Fonts */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('./fonts/Satoshi-Regular.otf') format('opentype'); /* Regular weight */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('./fonts/Satoshi-Medium.otf') format('opentype'); /* Medium weight */
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('./fonts/Satoshi-Bold.otf') format('opentype'); /* Bold weight */
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('./fonts/Satoshi-Light.otf') format('opentype'); /* Light weight */
+  font-weight: 300; /* Light */
+  font-style: normal;
+}
+
+/* Applying Fonts */
+h1 {
+  font-family: 'Integral CF', sans-serif; /* Use Integral CF for h1 */
+  margin: 0;
+}
+
+body {
+  font-family: 'Satoshi', sans-serif; /* Use Satoshi for body text */
+  padding: 0; 
+  margin: 0;
+}
+
+::-webkit-scrollbar{
+  display: none;
+}
+
+/* Example Classes for Specific Weights */
+.bold-text {
+  font-family: 'Satoshi';
+  font-weight: bold; /* Satoshi Bold */
+}
+
+.medium-text {
+  font-family: 'Satoshi';
+  font-weight: 500; /* Satoshi Medium */
+}
+
+.light-text {
+  font-family: 'Satoshi';
+  font-weight: 300; /* Satoshi Light */
+}
+
+
