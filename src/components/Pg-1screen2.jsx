@@ -85,7 +85,9 @@ const PageTwo = () => {
             />
           </SliderContainer>
         )}
-        <ViewAllBtn onClick={() => setViewAll(!viewAll)}>View All</ViewAllBtn>
+        <ViewAllBtn onClick={() => setViewAll(!viewAll)}>
+          {viewAll ? "View Less" : "View All"}
+        </ViewAllBtn>
       </NewArrivalsParent>
       <TopSelling>
         <Heading>TOP SELLING</Heading>
@@ -147,7 +149,7 @@ const PageTwo = () => {
           </SliderContainer>
         )}
         <ViewAllBtn onClick={() => setViewAllTwo(!viewAllTwo)}>
-          View All
+          {viewAllTwo ? "View Less" : "View All"}
         </ViewAllBtn>
       </TopSelling>
 
@@ -203,7 +205,7 @@ const Heading = styled.h1`
   margin-bottom: 3.438rem;
   text-align: center;
 
-  @media (max-width:500px){
+  @media (max-width: 500px) {
     font-size: 2rem;
   }
 `;
@@ -267,7 +269,7 @@ const CatHeading = styled.h1`
   text-align: center;
   margin: 4.375rem 0 4rem 0;
 
-  @media (max-width:500px){
+  @media (max-width: 500px) {
     font-size: 2rem;
   }
 `;
