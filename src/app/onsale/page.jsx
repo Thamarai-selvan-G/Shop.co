@@ -1,8 +1,9 @@
+import Products from "../tshirts/page"
 
 const page = () => {
   return (
     <div>
-      page
+     <Products/>
     </div>
   )
 }

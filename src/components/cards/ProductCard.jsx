@@ -4,12 +4,11 @@ import styled from "styled-components";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 const ProductCard = (props) => {
+  const navigate = useRouter();
 
-  const navigate = useRouter()
-
-function navigateFun() {
-  navigate.push('/tshirts')
-}
+  function navigateFun() {
+    navigate.push("/tshirts");
+  }
   return (
     <Container>
       <StyledImage
@@ -17,7 +16,6 @@ function navigateFun() {
         alt="img"
         width={295}
         height={298}
-
         onClick={navigateFun}
       />
       <Name>{props.name}</Name>
@@ -28,7 +26,9 @@ function navigateFun() {
       <PriceContainer>
         <Price>{props.price}</Price>
         {props.discount && <DiscountPrice>{props.discount}</DiscountPrice>}
-        {props.percentage && <DiscountPercentage>{props.percentage}</DiscountPercentage>}
+        {props.percentage && (
+          <DiscountPercentage>{props.percentage}</DiscountPercentage>
+        )}
       </PriceContainer>
     </Container>
   );
@@ -41,17 +41,25 @@ const Container = styled.div`
   flex-direction: column;
   align-items: start;
   justify-content: center;
-  
 `;
 const StyledImage = styled(Image)`
   margin-bottom: 1rem;
   cursor: pointer;
+
+  @media (max-width: 970px) {
+    width: 172px;
+    height: 174px;
+  }
 `;
 const Name = styled.h3`
   font-size: 1.25rem;
   font-weight: 700;
   margin: 0;
   margin: 0 0 0.5rem 0;
+
+  @media (max-width: 970px) {
+    font-size: 1rem;
+  }
 `;
 const RatingContainer = styled.div`
   display: flex;
@@ -59,14 +67,21 @@ const RatingContainer = styled.div`
   justify-content: center;
   gap: 0.813rem;
   margin: 0 0 0.5rem 0;
-`;
-const RatingImg = styled(Image)`
 
+  @media (max-width:970px){
+    font-size: 1.25rem;
+    gap: 0.688rem;
+  }
 `;
+const RatingImg = styled(Image)``;
 const RatingNumber = styled.p`
   font-weight: 400;
   font-size: 0.875rem;
   margin: 0;
+
+  @media (max-width: 970px) {
+    font-size: 0.875rem;
+  }
 `;
 const PriceContainer = styled.div`
   margin: 0;
@@ -80,6 +95,10 @@ const Price = styled.h2`
   font-size: 1.5rem;
   font-weight: 700;
   margin: 0;
+
+  @media (max-width: 970px) {
+    font-size: 1.25rem;
+  }
 `;
 const DiscountPrice = styled.h2`
   font-size: 1.5rem;
@@ -87,12 +106,19 @@ const DiscountPrice = styled.h2`
   margin: 0;
   color: #00000066;
   text-decoration: line-through;
+  @media (max-width: 970px) {
+    font-size: 1.25rem;
+  }
 `;
-const DiscountPercentage  = styled.h2`
-    padding: 0.375rem 0.875rem;
-    color: #FF3333;
-    border-radius: 3.875rem;
-    background-color:#FF33331A ;
-    font-size: 0.75rem;
-    margin: 0;
-`
+const DiscountPercentage = styled.h2`
+  padding: 0.375rem 0.875rem;
+  color: #ff3333;
+  border-radius: 3.875rem;
+  background-color: #ff33331a;
+  font-size: 0.75rem;
+  margin: 0;
+
+  @media (max-width: 970px) {
+    padding: 6px 14px;
+  }
+`;

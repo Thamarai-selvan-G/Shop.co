@@ -1,19 +1,22 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import styled from "styled-components";
-import Image from "next/image";
 import { FaChevronDown } from "react-icons/fa";
 import { IoIosSearch } from "react-icons/io";
 import { FaSearch } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaCircleUser } from "react-icons/fa6";
 import { GiHamburgerMenu } from "react-icons/gi";
-// import search from "../assets/icons/search.svg";
 
 const Navbar = () => {
+  const router = useRouter();
+
+  function goTocart() {
+    router.push("/cart");
+  }
   return (
     <ParentContainer>
-
       <Logo href={"/"}>
         <BurgerMenu>
           <GiHamburgerMenu />
@@ -38,10 +41,9 @@ const Navbar = () => {
         <Searchicon>
           <FaSearch />
         </Searchicon>
-        <FaCartShopping />
+        <FaCartShopping onClick={goTocart} />
         <FaCircleUser />
       </UserOpt>
-      
     </ParentContainer>
   );
 };
@@ -73,7 +75,7 @@ const Logo = styled(Link)`
   font-size: 2rem;
   font-weight: 700;
   @media (max-width: 750px) {
-   font-size: 1.5rem;
+    font-size: 1.5rem;
   }
 `;
 const Menu = styled.div`
@@ -143,7 +145,6 @@ const UserOpt = styled.div`
     gap: 0.785rem;
     align-items: end;
   }
-
 `;
 const Searchicon = styled.span`
   opacity: 0;

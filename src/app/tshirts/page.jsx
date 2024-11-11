@@ -1,5 +1,6 @@
 "use client";
 import styled from "styled-components";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
 import { FaStar } from "react-icons/fa6";
@@ -9,6 +10,11 @@ import { BsThreeDots } from "react-icons/bs";
 import ProductCard from "@/components/cards/ProductCard";
 
 const Products = () => {
+  const router = useRouter();
+
+  function goToCart() {
+    router.push("/cart");
+  }
   const reviews = [
     {
       name: "Sarah M.",
@@ -138,7 +144,7 @@ const Products = () => {
               <CountSum>{count}</CountSum>
               <Add onClick={() => setCount(count + 1)}>+</Add>
             </CartCounterContainer>
-            <ConfirmBtn>Add to Cart</ConfirmBtn>
+            <ConfirmBtn onClick={goToCart}>Add to Cart</ConfirmBtn>
           </CartParent>
         </ProductDetailContainer>
       </ProductInfoContainer>
@@ -532,6 +538,7 @@ const ConfirmBtn = styled.button`
   width: 25rem;
   height: 3.25rem;
   border-radius: 3.875rem;
+  cursor: pointer;
 
   &:hover {
     transition: 0.3s;

@@ -1,10 +1,16 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CartPage = () => {
-  const cartItems = [
+  const [quantity, setQuantity] = useState(0);
+  const [totalAmt, setTotalAmt] = useState(0);
+  const [coupon, setCoupon] = useState("");
+  const [cartItems, setCartItems] = useState([
     {
       id: 1,
       name: "Gradient Graphic T-shirt",
@@ -32,7 +38,56 @@ const CartPage = () => {
       quantity: 1,
       image: "/img/Frame 33.png",
     },
-  ];
+  ]);
+
+  useEffect(() => {
+    let SumTotal = cartItems.reduce((amt, item) => {
+      return amt + item.price * item.quantity;
+    }, 0);
+
+    setTotalAmt(SumTotal);
+  }, [cartItems]);
+
+  function setQuanttityData(index, meg) {
+    const key = index;
+    const method = meg;
+
+    // Find the product by its ID
+    const findProduct = cartItems.find((data) => data.id == key);
+
+    // Initialize changes variable
+    let changes;
+
+    if (method === "add") {
+      // Increment quantity
+      changes = { ...findProduct, quantity: findProduct.quantity + 1 };
+    } else {
+      // Decrement quantity
+      changes = { ...findProduct, quantity: findProduct.quantity - 1 };
+    }
+
+    // Update the cartItems state by mapping through the array and replacing the updated product
+    const updatedCartItems = cartItems.map((item) =>
+      item.id === key ? changes : item
+    );
+
+    // Set the updated array back to the cartItems state
+    setCartItems(updatedCartItems);
+  }
+
+  const handleApplyCoupon = () => {
+    if (coupon.trim() === "") {
+      // Show warning toast message if coupon field is empty
+      toast.warning("Please enter a coupon code!", {
+        position: "top-center", // Use direct string for position
+      });
+    } else {
+      // Show success toast message if coupon is entered
+      toast.success("Coupon applied successfully!", {
+        position: "top-center", // Use direct string for position
+      });
+    }
+  };
 
   return (
     <CartParent>
@@ -65,20 +120,22 @@ const CartPage = () => {
                     Color: <ColorSpan>{data.color}</ColorSpan>
                   </Color>
                   <PriceWraper>
-                    <Price>{data.price}</Price>
+                    <Price>${data.price}</Price>
                     <CounterBtn>
                       <Mines
                         src={"/img/newmines.svg"}
                         width={16}
                         height={16}
                         alt="minues"
+                        onClick={() => setQuanttityData(data.id, "less")}
                       />
-                      <Counter>1</Counter>
+                      <Counter>{data.quantity}</Counter>
                       <Plus
                         src={"/img/newplus.svg"}
                         width={16}
                         height={16}
                         alt="plus"
+                        onClick={() => setQuanttityData(data.id, "add")}
                       />
                     </CounterBtn>
                   </PriceWraper>
@@ -104,14 +161,20 @@ const CartPage = () => {
           </SubFeeWraper>
           <SumTotalWraper>
             <SumTotal>Total</SumTotal>
-            <SumTotalValue>$416</SumTotalValue>
+            <SumTotalValue>${totalAmt}</SumTotalValue>
           </SumTotalWraper>
           <PromoCodeContainer>
             <CodeInputParent>
               <Tag src={"/img/tag.svg"} width={24} height={24} alt="tag" />
-              <CodeInputFiled type="text" placeholder="Add your code.." />
+              <CodeInputFiled
+                type="text"
+                placeholder="Add your code.."
+                value={coupon}
+                onChange={(e) => setCoupon(e.target.value)}
+              />
             </CodeInputParent>
-            <ApplyBtn>Apply</ApplyBtn>
+            <ApplyBtn onClick={handleApplyCoupon}>Apply</ApplyBtn>
+            <ToastContainer />
           </PromoCodeContainer>
         </SummaryContainer>
       </CartListContainer>

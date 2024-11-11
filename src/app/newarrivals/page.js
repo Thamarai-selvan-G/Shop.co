@@ -1,9 +1,10 @@
 import React from 'react'
+import CategoryPage from '../category/page'
 
 const page = () => {
   return (
     <div>
-      new arrivals
+    <CategoryPage/>
     </div>
   )
 }
