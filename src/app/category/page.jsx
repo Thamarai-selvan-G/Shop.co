@@ -1,5 +1,5 @@
 "use client";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 import RangeTag from "@/components/RangeTag";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -7,12 +7,15 @@ import styled from "styled-components";
 import { FaChevronDown } from "react-icons/fa";
 import dummydata from "@/api/dummydata";
 
-const ProductCard = dynamic(() => import("@/components/cards/ProductCard"), { ssr: false });
-const PaginationPage = dynamic(() => import("@/components/PaginationPage"), { ssr: false });
+const ProductCard = dynamic(() => import("@/components/cards/ProductCard"), {
+  ssr: false,
+});
+const PaginationPage = dynamic(() => import("@/components/PaginationPage"), {
+  ssr: false,
+});
 
 const CategoryPage = () => {
   const [isClient, setIsClient] = useState(false);
-
 
   useEffect(() => {
     setIsClient(true);
@@ -166,7 +169,7 @@ const CategoryPage = () => {
                 return (
                   <Size
                     key={index}
-                    selectedSize={selectedSize === index}
+                    selected={selectedSize === index}
                     onClick={() => setSelectedSize(index)}
                   >
                     {sizeLable}
@@ -442,8 +445,9 @@ const SizeFilds = styled.div`
   margin-bottom: 1.5rem;
 `;
 const Size = styled.span`
-  background-color: ${(props) => (props.selectedSize ? "black" : "#F0F0F0")};
-  color: ${(props) => (props.selectedSize ? "white" : "#00000099")};
+  background-color: ${(props) => (props.selected ? "black" : "white")};
+  color: ${(props) => (props.selected ? "white" : "black")};
+  border: 1px solid black;
   padding: 10px 20px;
   border-radius: 62px;
   cursor: pointer;
@@ -582,12 +586,11 @@ const ProductsContainer = styled.div`
   gap: 20px;
   padding-bottom: 2rem;
   border-bottom: 1px solid #0000001a;
-  margin:  0 0 20px 0;
+  margin: 0 0 20px 0;
 
   @media (max-width: 400px) {
     gap: 10px;
   }
-
 `;
 const SecoundMenu = styled.div`
   display: none;
