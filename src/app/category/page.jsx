@@ -49,8 +49,7 @@ const CategoryPage = () => {
   const [Filtercss, setFilterCss] = useState(false);
   const [filterValue, setFilterValue] = useState("Most Popular");
 
-  //Pagination section
-
+  // Pagination section
   const [productData, setProductData] = useState(dummydata);
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(9);
@@ -59,10 +58,12 @@ const CategoryPage = () => {
   const firstPageIndex = lastPostIndex - postPerPage;
 
   const currentPosts = productData.slice(firstPageIndex, lastPostIndex);
+
   function settingFilterValue(event) {
     setFilterValue(event);
     setFilterCss(false);
   }
+
   if (!isClient) {
     return <div>Loading...</div>;
   }
@@ -228,7 +229,10 @@ const CategoryPage = () => {
         <PaginationHeader>
           <PageHeading>Casual</PageHeading>
           <DummyDiv>
-            <HeadFilter1>Showing 1-10 of 100 Products</HeadFilter1>
+            <HeadFilter1>
+              Showing {firstPageIndex + 1}-{lastPostIndex} of{" "}
+              {productData.length} Products
+            </HeadFilter1>
             <SecoundMenu>
               <FilterIcon
                 src={"/img/filter.svg"}
@@ -291,7 +295,6 @@ const CategoryPage = () => {
 };
 
 export default CategoryPage;
-
 const PageParent = styled.div`
   width: 90%;
   margin: 2rem auto 0 auto;
