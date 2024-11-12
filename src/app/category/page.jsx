@@ -7,12 +7,12 @@ import styled from "styled-components";
 import { FaChevronDown } from "react-icons/fa";
 import dummydata from "@/api/dummydata";
 
-
 const ProductCard = dynamic(() => import("@/components/cards/ProductCard"), { ssr: false });
 const PaginationPage = dynamic(() => import("@/components/PaginationPage"), { ssr: false });
 
 const CategoryPage = () => {
   const [isClient, setIsClient] = useState(false);
+
 
   useEffect(() => {
     setIsClient(true);
@@ -60,7 +60,6 @@ const CategoryPage = () => {
     setFilterValue(event);
     setFilterCss(false);
   }
-
   if (!isClient) {
     return <div>Loading...</div>;
   }
