@@ -28,7 +28,7 @@ const Navbar = () => {
           Shop <FaChevronDown />
         </Links>
         <Links href={"/onsale"}>On Sale</Links>
-        <Links href={"/newarrivals"}>New Arrivals</Links>
+        <Links href={"/category"}>Category</Links>
         <Links href={"/brands"}>Brands</Links>
       </Menu>
       <SearchContainer>
