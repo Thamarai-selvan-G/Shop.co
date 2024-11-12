@@ -19,26 +19,34 @@ const PaginationPage = ({
 
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
-  // Update isSmallScreen state based on window size
+  
   useEffect(() => {
-    const handleResize = () => setIsSmallScreen(window.innerWidth <= 400);
-    handleResize(); // Initial check
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 400); 
+    };
+    if (typeof window !== "undefined") {
+      handleResize(); 
+      window.addEventListener("resize", handleResize); 
+    }
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("resize", handleResize); 
+      }
+    };
   }, []);
 
-  // Helper function to create page numbers with ellipsis
+  
   const getPageNumbers = () => {
     let pageNumbers = [];
-    let startPage = Math.max(currentPage - 1, 2); // Start from 2nd page or before
-    let endPage = Math.min(currentPage + 2, totalPages - 1); // End at 2nd last page or before
+    let startPage = Math.max(currentPage - 1, 2); 
+    let endPage = Math.min(currentPage + 2, totalPages - 1); 
 
     if (isSmallScreen) {
-      // Show only 2 pages, e.g., current page and one page before or after
+    
       startPage = currentPage > 2 ? currentPage - 1 : currentPage;
       endPage = currentPage < totalPages - 1 ? currentPage + 1 : currentPage;
     } else {
-      // For larger screens, use the previous logic with 4 pages
+      
       if (currentPage <= 2) {
         startPage = 2;
         endPage = Math.min(4, totalPages - 1);
@@ -62,7 +70,7 @@ const PaginationPage = ({
   return (
     <Nav>
       <PreviousNextWrapper>
-        {/* Previous Button */}
+       
         {items.find((item) => item.type === "previous") && (
           <PageButton {...items.find((item) => item.type === "previous")}>
             <PreviousBtn
@@ -87,7 +95,7 @@ const PaginationPage = ({
               <PageButton
                 selected={currentPage === page}
                 onClick={() => setCurrentPage(page)}
-                key={page} // Use page number as key for stability
+                key={page} 
               >
                 {page}
               </PageButton>
@@ -113,14 +121,14 @@ const PaginationPage = ({
 
 export default PaginationPage;
 
-// Styled components
+
 const Nav = styled.nav`
   width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 1rem;
   align-items: center;
-  flex-wrap: wrap; // Allow wrapping for smaller screens
+  flex-wrap: wrap; 
   gap: 1rem;
 `;
 
