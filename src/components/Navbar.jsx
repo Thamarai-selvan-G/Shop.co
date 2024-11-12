@@ -50,18 +50,26 @@ const Navbar = () => {
 
 export default Navbar;
 
-const ParentContainer = styled.div`
+const Nav = styled.div`
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: red; */
+`
+const ParentContainer = styled.div`
+  width: 95%;
   margin: 0 auto;
   height: 5.625rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 2.5rem;
+  /* background-color: rebeccapurple; */
 
   @media (max-width: 1300px) {
-    justify-content: space-around;
-    gap: 1rem;
+    justify-content: space-between;
+    
   }
 `;
 

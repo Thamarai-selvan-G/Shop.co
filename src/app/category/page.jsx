@@ -1,13 +1,19 @@
 "use client";
 import RangeTag from "@/components/RangeTag";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FaChevronDown } from "react-icons/fa";
 import dummydata from "@/api/dummydata";
 import ProductCard from "@/components/cards/ProductCard";
 import PaginationPage from "@/components/PaginationPage";
 const CategoryPage = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const colors = [
     "#00C12B",
     "#F50606",
@@ -49,6 +55,10 @@ const CategoryPage = () => {
   function settingFilterValue(event) {
     setFilterValue(event);
     setFilterCss(false);
+  }
+
+  if (!isClient) {
+    return <div>Loading...</div>;
   }
 
   return (
@@ -569,7 +579,12 @@ const ProductsContainer = styled.div`
   gap: 20px;
   padding-bottom: 2rem;
   border-bottom: 1px solid #0000001a;
-  margin-bottom: 20px;
+  margin:  0 0 20px 0;
+
+  @media (max-width: 400px) {
+    gap: 10px;
+  }
+
 `;
 const SecoundMenu = styled.div`
   display: none;

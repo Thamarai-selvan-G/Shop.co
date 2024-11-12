@@ -114,7 +114,12 @@ const Nav = styled.nav`
   align-items: center;
 
   @media (max-width: 600px) {
-    flex-wrap: wrap;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* background-color: red; */
+    gap: 1rem;
   }
 `;
 
