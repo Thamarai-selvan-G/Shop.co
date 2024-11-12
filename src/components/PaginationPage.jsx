@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import usePagination from "@mui/material/usePagination";
 import Image from "next/image";
@@ -17,14 +17,21 @@ const PaginationPage = ({
     onChange: (event, page) => setCurrentPage(page),
   });
 
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  // Update isSmallScreen state based on window size
+  useEffect(() => {
+    const handleResize = () => setIsSmallScreen(window.innerWidth <= 400);
+    handleResize(); // Initial check
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   // Helper function to create page numbers with ellipsis
   const getPageNumbers = () => {
     let pageNumbers = [];
     let startPage = Math.max(currentPage - 1, 2); // Start from 2nd page or before
     let endPage = Math.min(currentPage + 2, totalPages - 1); // End at 2nd last page or before
-
-    // Adjust pagination for 2 pages on smaller screens (below 400px)
-    const isSmallScreen = window.innerWidth <= 400;
 
     if (isSmallScreen) {
       // Show only 2 pages, e.g., current page and one page before or after
@@ -80,6 +87,7 @@ const PaginationPage = ({
               <PageButton
                 selected={currentPage === page}
                 onClick={() => setCurrentPage(page)}
+                key={page} // Use page number as key for stability
               >
                 {page}
               </PageButton>
@@ -95,7 +103,7 @@ const PaginationPage = ({
         {items.find((item) => item.type === "next") && (
           <PageButton {...items.find((item) => item.type === "next")}>
             Next
-            <NextBtn src="/img/right.svg" width={20} height={20} alt="Next" />
+            <NextBtn src="/img/next.svg" width={20} height={20} alt="Next" />
           </PageButton>
         )}
       </NextPreviousWrapper>
@@ -112,15 +120,8 @@ const Nav = styled.nav`
   justify-content: center;
   margin-top: 1rem;
   align-items: center;
-
-  @media (max-width: 600px) {
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* background-color: red; */
-    gap: 1rem;
-  }
+  flex-wrap: wrap; // Allow wrapping for smaller screens
+  gap: 1rem;
 `;
 
 const PreviousNextWrapper = styled.div`

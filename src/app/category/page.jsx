@@ -1,12 +1,16 @@
 "use client";
+import dynamic from 'next/dynamic';
 import RangeTag from "@/components/RangeTag";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FaChevronDown } from "react-icons/fa";
 import dummydata from "@/api/dummydata";
-import ProductCard from "@/components/cards/ProductCard";
-import PaginationPage from "@/components/PaginationPage";
+
+
+const ProductCard = dynamic(() => import("@/components/cards/ProductCard"), { ssr: false });
+const PaginationPage = dynamic(() => import("@/components/PaginationPage"), { ssr: false });
+
 const CategoryPage = () => {
   const [isClient, setIsClient] = useState(false);
 

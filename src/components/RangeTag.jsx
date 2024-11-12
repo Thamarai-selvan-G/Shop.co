@@ -39,13 +39,16 @@ const RangeTag = () => {
               {children}
             </Track>
           )}
-          renderThumb={({ props, index }) => (
-            <Thumb {...props} style={{ ...props.style }}>
+          renderThumb={({ props, index }) => {
+          const { key, ...restProps } = props;  // **Destructuring key from props**
+          return (
+            <Thumb key={key} {...restProps} style={{ ...restProps.style }}>  {/* **Pass key directly** */}
               {/* Optional: display current value inside the thumb */}
               <ThumbLabel>{values[index]}</ThumbLabel>
             </Thumb>
-          )}
-        />
+          );
+        }}
+      />
         <RangeValues>
           <span>${values[0]}</span>
           <span>${values[1]}</span>
